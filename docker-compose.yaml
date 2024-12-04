@@ -1,0 +1,10 @@
+services:
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/bash
+    tty: true
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
