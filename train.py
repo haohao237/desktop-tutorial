@@ -3,18 +3,15 @@ from torch.utils.data import DataLoader, Dataset
 from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from model import create_model
-from tokenizer import get_tokenizer
-from process import preprocess_data
 
 # データの読み込みと前処理
-df = preprocess_data()
+df = pd.read_csv('data/data.csv')
 
 # データセットを分割
 train_texts, val_texts, train_labels, val_labels = train_test_split(df['question'], df['label'], test_size=0.2)
 
 # トークナイザーの準備
-tokenizer = get_tokenizer()
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 # データセットクラスの作成
 class CustomDataset(Dataset):
@@ -52,7 +49,7 @@ train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=True)
 val_dataloader = DataLoader(val_dataset, batch_size=8)
 
 # モデルの定義
-model = create_model()
+model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=4)
 
 # トレーニング設定
 training_args = TrainingArguments(
