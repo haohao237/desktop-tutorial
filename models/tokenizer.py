@@ -1,4 +1,4 @@
-from transformers import T5Tokenizer
+from transformers import BertTokenizer
 
 def get_tokenizer():
-    return T5Tokenizer.from_pretrained('t5-small')
+    return BertTokenizer.from_pretrained('bert-base-uncased')
