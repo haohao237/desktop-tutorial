@@ -1,0 +1,15 @@
+/mnt/c/Users/221032/DockerProject/test/desktop-tutorial
+├── data
+│   ├──data.csv
+│   └──preprocess.py
+├──models
+│   ├──model.py
+│   └──tokenizer.py
+├──results
+│   └──#学習結果
+├──.gitattributes
+├──.gitignore
+├──requirements.txt
+├──docker-compose.yaml
+├── train.py
+└── Dockerfile
