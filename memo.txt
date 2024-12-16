@@ -1,15 +1,25 @@
-/mnt/c/Users/221032/DockerProject/test/desktop-tutorial
+project
+├── backend
+│   ├── feedback.py               # フィードバック生成スクリプト（Flask API）
+│   ├── requirements.txt          # 必要なライブラリ
+│   └── Dockerfile                # バックエンド用Dockerfile
 ├── data
-│   ├──data.csv
-│   └──preprocess.py
-├──models
-│   ├──model.py
-│   └──tokenizer.py
-├──results
-│   └──#学習結果
-├──.gitattributes
-├──.gitignore
-├──requirements.txt
-├──docker-compose.yaml
-├── train.py
-└── Dockerfile
+│   ├── data.csv                  # サンプル問題データ
+│   └── preprocess.py             # データ前処理用スクリプト
+├── models
+│   ├── model.py                  # モデル定義
+│   └── tokenizer.py              # トークナイザー定義
+├── results
+│   ├── results.csv               # ユーザー回答結果
+│   └── logs/                     # 学習ログ
+├── frontend
+│   ├── public                    # 静的ファイル
+│   ├── src
+│   │   ├── App.vue               # フロントエンドエントリーポイント
+│   │   ├── components
+│   │   │   └── FeedbackList.vue  # フィードバック表示用コンポーネント
+│   │   ├── main.js               # Vue初期化スクリプト
+│   │   └── api.js                # API通信用スクリプト
+│   ├── package.json              # フロントエンド依存関係
+│   └── Dockerfile                # フロントエンド用Dockerfile
+├── docker-compose.yaml           # Docker構成ファイル
