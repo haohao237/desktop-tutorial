@@ -1,1 +1,36 @@
 __pycache__/
+# 仮想環境
+venv/
+myenv/
+
+# モデルとトレーニングデータ
+*.h5
+*.bin
+*.pkl
+*.model
+*.csv
+*.zip
+
+# Pythonキャッシュファイル
+__pycache__/
+*.pyc
+*.pyo
+
+# ログファイル
+*.log
+*.out
+*.err
+
+# IDEの設定ファイル
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+
+# OSによる一時ファイル
+.DS_Store
+Thumbs.db
+
+# Git LFSで管理する必要のないファイル
+*.zip
