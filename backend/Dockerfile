@@ -7,8 +7,16 @@ RUN pip install "transformers[torch]" pandas scikit-learn
 # 作業ディレクトリの設定
 WORKDIR /app
 
-# ローカルのコードをコンテナにコピー
-COPY . /app
+# 必要なファイルをコピー
+COPY requirements.txt .
+COPY feedback.py /app/
+COPY ../results /app/results
 
-# 実行コマンド
-CMD ["python", "train.py"]
+# 必要なパッケージをインストール
+RUN pip install -r requirements.txt
+
+# スクリプトをコピー
+COPY . .
+
+# Flaskサーバーを起動
+CMD ["python", "feedback.py"]

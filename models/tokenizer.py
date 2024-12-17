@@ -1,4 +1,9 @@
-from transformers import BertTokenizer
+from transformers import GPT2Tokenizer
 
-def get_tokenizer():
-    return BertTokenizer.from_pretrained('bert-base-uncased')
+# トークナイザーのロード
+def load_tokenizer():
+    return GPT2Tokenizer.from_pretrained("gpt2")
+
+if __name__ == "__main__":
+    tokenizer = load_tokenizer()
+    print("トークナイザーロード完了！")
