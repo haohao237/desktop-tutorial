@@ -1,11 +1,14 @@
 import torch
+from transformers import BertTokenizer, BertForSequenceClassification
 from torch.utils.data import DataLoader, Dataset
-from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
 # データの読み込みと前処理
 df = pd.read_csv('data/data.csv')
+
+# NaNが含まれている行を削除
+df = df.dropna(subset=['label'])
 
 # データセットを分割
 train_texts, val_texts, train_labels, val_labels = train_test_split(df['question'], df['label'], test_size=0.2)
@@ -27,6 +30,12 @@ class CustomDataset(Dataset):
     def __getitem__(self, idx):
         text = str(self.texts[idx])
         label = self.labels[idx]
+
+        # NaNをチェックして、NaNの場合は適切な値に設定
+        if pd.isna(label):
+            label = 0  # ここでは0に設定していますが、他の値でも構いません
+
+        label = int(label)  # 型変換を強制
         encoding = self.tokenizer.encode_plus(
             text,
             add_special_tokens=True,
@@ -52,6 +61,8 @@ val_dataloader = DataLoader(val_dataset, batch_size=8)
 model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=4)
 
 # トレーニング設定
+from transformers import Trainer, TrainingArguments
+
 training_args = TrainingArguments(
     output_dir='./results',
     num_train_epochs=3,

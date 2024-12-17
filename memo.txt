@@ -1,15 +1,15 @@
 /mnt/c/Users/221032/DockerProject/test/desktop-tutorial
 ├── data
-│   ├──data.csv
-│   └──preprocess.py
-├──models
-│   ├──model.py
-│   └──tokenizer.py
-├──results
-│   └──#学習結果
-├──.gitattributes
-├──.gitignore
-├──requirements.txt
-├──docker-compose.yaml
-├── train.py
-└── Dockerfile
+│   ├── data.csv              # 問題データ
+│   ├── preprocess.py         # データ前処理用
+├── models
+│   ├── model.py              # モデル定義
+│   ├── tokenizer.py          # トークナイザー定義
+├── results
+│   ├── results.csv           # ユーザー回答結果
+│   ├── logs/                 # 学習ログ
+├── feedback.py               # フィードバック生成スクリプト
+├── requirements.txt          # 必要なライブラリ
+├── docker-compose.yaml       # Docker設定
+├── train.py                  # モデル訓練スクリプト
+└── Dockerfile                # Dockerイメージ作成

@@ -1,4 +1,14 @@
-from transformers import BertTokenizer
+from transformers import GPT2Tokenizer
 
-def get_tokenizer():
-    return BertTokenizer.from_pretrained('bert-base-uncased')
+class FeedbackTokenizer:
+    def __init__(self, model_name='gpt2'):
+        # トークナイザーのロード
+        self.tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+
+    def encode(self, text):
+        # テキストをトークンにエンコードする
+        return self.tokenizer.encode(text, return_tensors='pt')
+
+    def decode(self, tokens):
+        # トークンをテキストにデコードする
+        return self.tokenizer.decode(tokens, skip_special_tokens=True)
