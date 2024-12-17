@@ -9,8 +9,6 @@ WORKDIR /app
 
 # 必要なファイルをコピー
 COPY requirements.txt .
-COPY feedback.py /app/
-COPY ../results /app/results
 
 # 必要なパッケージをインストール
 RUN pip install -r requirements.txt
