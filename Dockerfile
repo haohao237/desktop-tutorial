@@ -1,6 +1,6 @@
 FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
 
-# NVIDIA Container Runtimeの設定（推奨形式に修正）
+# NVIDIA Container Runtimeの設定
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 

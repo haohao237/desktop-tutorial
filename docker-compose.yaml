@@ -3,11 +3,12 @@ services:
   app:
     build: .  # build時にDockerfileを使用
     volumes:
-      - /mnt/c/Users/221032/DockerProject/test/desktop-tutorial/data:/app/data
-      - /mnt/c/Users/221032/DockerProject/test/desktop-tutorial/models:/app/models  # モデル保存用ディレクトリ
-      - /mnt/c/Users/221032/DockerProject/test/desktop-tutorial/scripts:/app/scripts
-      - /mnt/c/Users/221032/DockerProject/test/desktop-tutorial/checkpoints:/app/checkpoints
-    deploy: # GPUを使用するための設定
+      - ./data:/app/data:ro   # 読み取り専用ボリュームマウント
+      - ./models:/app/models:ro  # モデル保存用ディレクトリ
+      - ./scripts:/app/scripts:ro  # スクリプト
+      - ./checkpoints:/app/checkpoints:ro  # チェックポイント
+
+    deploy:  # GPUを使用するための設定
       resources:
         reservations:
           devices:
