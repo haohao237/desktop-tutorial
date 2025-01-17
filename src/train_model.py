@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
-import os  # ディレクトリ作成のために必要
+import os
 
 # データの読み込み
 data = pd.read_csv("/app/data/answers.csv")
@@ -26,7 +26,7 @@ merged_data["feedback"] = merged_data.apply(
 
 # ラベルをカテゴリ ID に変換
 feedback_labels = merged_data["feedback"].astype("category")
-merged_data["label_id"] = feedback_labels.cat.codes  # 数値ラベルに変換
+merged_data["label_id"] = feedback_labels.cat.codes
 
 class FeedbackDataset(Dataset):
     def __init__(self, data):
@@ -43,33 +43,30 @@ class FeedbackDataset(Dataset):
 
 # モデル定義
 class FeedbackModel(nn.Module):
-    def __init__(self, num_labels):
+    def __init__(self, input_size, hidden_size, num_labels):
         super(FeedbackModel, self).__init__()
-        self.fc = nn.Sequential(
-            nn.Linear(2, 64),
-            nn.ReLU(),
-            nn.Linear(64, 128),
-            nn.ReLU(),
-            nn.Linear(128, 256),
-            nn.ReLU(),
-            nn.Linear(256, num_labels)
-        )
+        self.rnn = nn.LSTM(input_size, hidden_size, batch_first=True)
+        self.fc = nn.Linear(hidden_size, num_labels)
 
     def forward(self, x):
-        return self.fc(x)
+        rnn_out, _ = self.rnn(x.unsqueeze(1))  # 形状調整: (batch_size, 1, input_size)
+        logits = self.fc(rnn_out[:, -1, :])  # 最後の時間ステップの出力を全結合層へ
+        return logits
 
 # データセットとデータローダ
 train_dataset = FeedbackDataset(merged_data)
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 
 # モデルの初期化
+input_size = 2
+hidden_size = 64
 num_labels = len(feedback_labels.cat.categories)
-model = FeedbackModel(num_labels)
+model = FeedbackModel(input_size, hidden_size, num_labels)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 criterion = nn.CrossEntropyLoss()
 
 # 学習
-for epoch in range(50):  # エポック数を増やしてみる
+for epoch in range(50):
     model.train()
     for features, labels in train_loader:
         optimizer.zero_grad()
@@ -82,7 +79,7 @@ for epoch in range(50):  # エポック数を増やしてみる
 # モデル保存
 try:
     save_dir = "/app/models/feedback_model"
-    os.makedirs(save_dir, exist_ok=True)  # ディレクトリが存在しなければ作成
+    os.makedirs(save_dir, exist_ok=True)
     model_path = os.path.join(save_dir, "model.pth")
     torch.save(model.state_dict(), model_path)
     print(f"モデルが {model_path} に保存されました。")

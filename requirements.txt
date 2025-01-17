@@ -7,3 +7,6 @@ nvidia-pyindex
 seaborn
 pytorch-lightning
 scipy
+fastapi
+uvicorn
+nltk
