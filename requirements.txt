@@ -1,4 +1,12 @@
-torch
-transformers
 pandas
+torch
 scikit-learn
+numpy
+matplotlib
+nvidia-pyindex
+seaborn
+pytorch-lightning
+scipy
+fastapi
+uvicorn
+nltk

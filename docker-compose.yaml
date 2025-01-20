@@ -1,10 +1,19 @@
+version: "3.9"
 services:
-  python:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: /bin/bash
-    tty: true
+  app:
+    build: .  # build時にDockerfileを使用
     volumes:
-      - .:/workspace
-    working_dir: /workspace
+      - ./data:/app/data:ro   # 読み取り専用ボリュームマウント
+      - ./models:/app/models:ro  # モデル保存用ディレクトリ
+      - ./scripts:/app/scripts:ro  # スクリプト
+      - ./checkpoints:/app/checkpoints:ro  # チェックポイント
+
+    deploy:  # GPUを使用するための設定
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1  # 使用するGPUの数
+              capabilities: [gpu]
+    stdin_open: true
+    tty: true  # コンテナに対する入力を有効にし、標準入力と出力を使用可能にする

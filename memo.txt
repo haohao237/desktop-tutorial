@@ -1,15 +1,14 @@
-/mnt/c/Users/221032/DockerProject/test/desktop-tutorial
-├── data
-│   ├──data.csv
-│   └──preprocess.py
-├──models
-│   ├──model.py
-│   └──tokenizer.py
-├──results
-│   └──#学習結果
-├──.gitattributes
-├──.gitignore
-├──requirements.txt
-├──docker-compose.yaml
-├── train.py
-└── Dockerfile
+desktop-tutorial/
+├── data/
+│   ├── questions.csv          # 問題データ
+│   ├── answers.csv            # 回答データ
+│   ├── feedback_samples.csv   # フィードバック用の学習データ
+├── models/
+│   ├── feedback_model/        # 機械学習モデル保存ディレクトリ
+│   │   ├── model.pth          # 学習したモデル
+├── src/
+│   ├──Ollama_api.py           #Ollamaとの連携
+│   └──ollama_openai_api_japan.py #これはollamaに命令するとこ
+├── Dockerfile                 # Docker環境の設定
+├── requirements.txt           # 必要なPythonライブラリ
+└── README.md                  # プロジェクトの説明               # プロジェクトの説明
