@@ -2,13 +2,17 @@ desktop-tutorial/
 ├── data/
 │   ├── questions.csv          # 問題データ
 │   ├── answers.csv            # 回答データ
-│   ├── feedback_samples.csv   # フィードバック用の学習データ
-├── models/
-│   ├── feedback_model/        # 機械学習モデル保存ディレクトリ
-│   │   ├── model.pth          # 学習したモデル
 ├── src/
 │   ├──Ollama_api.py           #Ollamaとの連携
 │   └──ollama_openai_api_japan.py #これはollamaに命令するとこ
 ├── Dockerfile                 # Docker環境の設定
 ├── requirements.txt           # 必要なPythonライブラリ
-└── README.md                  # プロジェクトの説明               # プロジェクトの説明
+
+
+実行コマンド
+cd src(仮想環境の階層に行く)
+python -m venv saiki (仮想環境作る)
+.\saiki\Scripts\activate　(仮想環境だお)
+python ollama_openai_api_japan.py (フィードバック)
+
+requirements.txtはダウンロードじゃ
