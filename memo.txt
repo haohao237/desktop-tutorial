@@ -7,9 +7,8 @@ desktop-tutorial/
 │   ├── feedback_model/        # 機械学習モデル保存ディレクトリ
 │   │   ├── model.pth          # 学習したモデル
 ├── src/
-│   ├── train_model.py         # モデルの学習スクリプト
-│   ├── analyze_feedback.py    # データ解析とフィードバック生成
-│   └── feedback_generator.py  # フィードバック生成用のスクリプト（必要な場合）
+│   ├──Ollama_api.py           #Ollamaとの連携
+│   └──ollama_openai_api_japan.py #これはollamaに命令するとこ
 ├── Dockerfile                 # Docker環境の設定
 ├── requirements.txt           # 必要なPythonライブラリ
 └── README.md                  # プロジェクトの説明               # プロジェクトの説明
