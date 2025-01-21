@@ -16,3 +16,5 @@ python -m venv saiki (仮想環境作る)
 python ollama_openai_api_japan.py (フィードバック)
 
 requirements.txtはダウンロードじゃ
+
+ollama_open_api_japan.py・・・answer.csvとquestions.csvのデータを読み込ませてるから、DBと帳尻合わせどうしよう
